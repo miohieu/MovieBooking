@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+}
+
+*, body {
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+.row__title {
+    width:15px;
+}
+
+.chair {
+    width: 50px;
+    padding:10px;
+    margin-top: 5px;
+    border: solid black 1px;
+    border-radius: 8px;
+    @apply text-center hover:bg-sky-700
+}
+
+.chair-list-container {
+    margin: 10px auto;
+    @apply flex self-center w-6/12
+}
+
+.booking {
+    background-color: skyblue;
+}
+
