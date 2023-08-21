@@ -8,10 +8,11 @@ interface Chair {
 }
 
 const ChairComponent = ({ chair }: Chair) => {
-    const { soGhe, gia, daDat } = chair
+    const { soGhe } = chair
 
 
-    const bookingChair = useAppSelector(state => state.movie.bookedChairs)
+        const bookingChair = useAppSelector(state => state.movie.bookingChairs)
+        const bookedChair = useAppSelector(state => state.movie.bookedChairs)
 
     const dispatch = useAppDispatch()
 
@@ -23,6 +24,7 @@ const ChairComponent = ({ chair }: Chair) => {
         <div
             className={cn("chair", {
                 booking: bookingChair.find(e => e.soGhe === soGhe),
+                booked: bookedChair.find(e => e.soGhe === soGhe),
             })}
             onClick={handleBooking}>
             {soGhe}

@@ -1,6 +1,7 @@
-import { createSlice, 
-    PayloadAction 
+import {
+    createSlice,
 } from "@reduxjs/toolkit";
+
 import { ChairProps } from "../types";
 
 interface Chair {
@@ -8,11 +9,13 @@ interface Chair {
 }
 
 interface BookedChairState {
-    bookedChairs: []  
+    bookedChairs: Chair[],
+    bookingChairs: Chair[]
 }
 
 const initialState: BookedChairState = {
-    bookedChairs: []
+    bookedChairs: [],
+    bookingChairs: []
 }
 
 export const bookedChair = createSlice({
@@ -20,19 +23,27 @@ export const bookedChair = createSlice({
     initialState,
 
     reducers: {
-        addChair: (state, action: PayloadAction<Chair>)=> {
-                    const isBooked = state.bookedChairs.find(e => e.soGhe === action.payload.soGhe)
-                    const idx = state.bookedChairs.indexOf(e => e.soGhe === action.payload.soGhe)
-            if(isBooked) {
-                state.bookedChairs.splice(idx,1)
+        addChair: (state, { payload }) => {
+            const isBooking = state.bookingChairs.find(e => e.soGhe === payload.soGhe)
+            const isBooked = state.bookedChairs.find(e => e.soGhe === payload.soGhe)
+            if (isBooking) {
+                const indx = state.bookingChairs.findIndex(chair => chair.soGhe === payload.soGhe)
+                state.bookingChairs.splice(indx, 1)
+            } else if (isBooked) {
+                return
             } else {
-                state.bookedChairs.push(action.payload)
-
+                state.bookingChairs.push(payload)
             }
+        },
+        payChair: (state) => {
+            const arr = [...state.bookingChairs]
+            state.bookedChairs = arr
+            state.bookingChairs = [];
+            alert("Dat ve thanh cong")
         }
     }
 })
 
-export const {addChair} = bookedChair.actions
+export const { addChair, payChair } = bookedChair.actions
 
 export default bookedChair.reducer

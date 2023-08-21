@@ -1,11 +1,12 @@
 import "./index.css"
-import { ChairList, Header } from "./components"
+import { ChairList, Header, Payment } from "./components"
 
 function App() {
     return (
         <div>
         <Header />
         <ChairList />
+        <Payment/>
         </div>
     )
 }
